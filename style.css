@@ -256,12 +256,13 @@ gap:18px;
 
 .logo{
 
-width:95px;
+width:170px;
+
+height:auto;
 
 transition:.4s;
 
 }
-
 .logo:hover{
 
 transform:scale(1.06);
@@ -272,7 +273,7 @@ transform:scale(1.06);
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:34px;
+font-size:44px;
 
 font-weight:700;
 
