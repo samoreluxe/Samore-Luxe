@@ -103,34 +103,28 @@ desc
 
 });
 /*====================
-
 SEARCH
-
 ====================*/
 
 const searchInput = document.querySelector(".search-box input");
 
-const products = document.querySelectorAll(".product-card");
+if (searchInput) {
 
-if(searchInput){
+searchInput.addEventListener("input", function () {
 
-searchInput.addEventListener("keyup",()=>{
+const value = this.value.toLowerCase();
 
-const value = searchInput.value.toLowerCase();
+document.querySelectorAll(".product-card").forEach(card => {
 
-products.forEach(product=>{
+const text = card.innerText.toLowerCase();
 
-const title = product.querySelector("h3").innerText.toLowerCase();
+if (text.includes(value)) {
 
-const desc = product.querySelector("p").innerText.toLowerCase();
+card.style.display = "block";
 
-if(title.includes(value) || desc.includes(value)){
+} else {
 
-product.style.display="block";
-
-}else{
-
-product.style.display="none";
+card.style.display = "none";
 
 }
 
