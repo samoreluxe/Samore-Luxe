@@ -1269,6 +1269,31 @@ font-size:14px;
 color:#9f9f9f;
 
 }
+.payment-section{
+    margin:30px auto;
+    padding:20px;
+    max-width:400px;
+    background:#151515;
+    border:1px solid rgba(183,110,121,.30);
+    border-radius:12px;
+}
+
+.payment-section h4{
+    color:var(--rose);
+    font-size:22px;
+    margin-bottom:15px;
+}
+
+.payment-section p{
+    color:#d8d8d8;
+    font-size:16px;
+    margin:8px 0;
+    line-height:26px;
+}
+
+.payment-section strong{
+    color:#fff;
+}
 /*====================
 
 RESPONSIVE
