@@ -1665,6 +1665,16 @@ section{
     scroll-margin-top:120px;
 }
 
+.top-bar{
+    background:#b76e79;
+    color:#fff;
+    text-align:center;
+    padding:10px;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+
 /*====================
 
 END OF STYLE.CSS
