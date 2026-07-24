@@ -492,10 +492,11 @@ font-weight:600;
 HERO
 
 ====================*/
+/*==================== HERO ====================*/
 
 .hero{
 
-height:85vh;
+min-height:80vh;
 
 background:url("assets/hero.png") center center/cover no-repeat;
 
@@ -508,6 +509,8 @@ justify-content:center;
 position:relative;
 
 margin-top:90px;
+
+padding:100px 20px 60px;
 
 }
 
@@ -545,7 +548,7 @@ font-size:18px;
 
 text-transform:uppercase;
 
-margin-bottom:20px;
+margin-bottom:15px;
 
 }
 
@@ -553,23 +556,25 @@ margin-bottom:20px;
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:95px;
+font-size:82px;
 
 font-weight:700;
 
-margin-bottom:25px;
+margin-bottom:20px;
+
+line-height:1.1;
 
 }
 
 .hero-content p{
 
-font-size:20px;
+font-size:19px;
 
-line-height:42px;
+line-height:34px;
 
 color:#f1f1f1;
 
-max-width:760px;
+max-width:700px;
 
 margin:auto;
 
@@ -577,15 +582,83 @@ margin:auto;
 
 .hero-buttons{
 
-margin-top:45px;
+margin-top:35px;
 
 display:flex;
 
 justify-content:center;
 
-gap:20px;
+gap:18px;
 
 flex-wrap:wrap;
+
+}
+
+.hero-features{
+
+margin-top:20px;
+
+color:#d4af37;
+
+font-size:15px;
+
+font-weight:500;
+
+letter-spacing:1px;
+
+}
+
+/*==================== MOBILE ====================*/
+
+@media (max-width:768px){
+
+.hero{
+
+min-height:60vh;
+
+padding:90px 20px 40px;
+
+}
+
+.hero-content h4{
+
+font-size:15px;
+
+letter-spacing:3px;
+
+}
+
+.hero-content h1{
+
+font-size:46px;
+
+}
+
+.hero-content p{
+
+font-size:15px;
+
+line-height:28px;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.hero-features{
+
+font-size:12px;
+
+line-height:1.8;
+
+margin-top:15px;
+
+}
 
 }
 
