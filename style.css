@@ -495,7 +495,7 @@ HERO
 
 .hero{
 
-height:100vh;
+height:85vh;
 
 background:url("assets/hero.png") center center/cover no-repeat;
 
@@ -1517,6 +1517,47 @@ width:95px;
 .brand h2{
 
 font-size:24px;
+
+}
+
+}
+@media (max-width:768px){
+
+.hero{
+
+min-height:70vh;
+
+padding:120px 20px 60px;
+
+}
+
+.hero h1{
+
+font-size:42px;
+
+}
+
+.hero p{
+
+font-size:16px;
+
+line-height:1.7;
+
+}
+
+.hero-buttons{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.hero-features{
+
+font-size:13px;
+
+line-height:1.8;
 
 }
 
