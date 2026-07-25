@@ -1,16 +1,16 @@
 /*==================================
 SAMORE LUXE
-script.js
+LUXURY SCRIPT.JS v2.0 (PART 1)
+Replace your complete script.js
 ==================================*/
 
-/*====================
+/*=========================
 ADD TO CART
-====================*/
+=========================*/
 
 let cartCount = 0;
 
-const cartCounter =
-document.getElementById("cart-count");
+const cartCounter = document.getElementById("cart-count");
 
 document.querySelectorAll(".add-cart").forEach(button=>{
 
@@ -20,61 +20,67 @@ cartCount++;
 
 if(cartCounter){
 
-cartCounter.innerText=cartCount;
+cartCounter.innerHTML=cartCount;
 
 }
 
-button.innerHTML=
-'<i class="fa-solid fa-check"></i> Added';
+button.innerHTML='<i class="fa-solid fa-check"></i> Added';
 
 button.style.background="#2ecc71";
 
+button.disabled=true;
+
 setTimeout(()=>{
 
-button.innerHTML=
-'<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
+button.innerHTML='<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
 
 button.style.background="";
 
-},1500);
+button.disabled=false;
+
+},1800);
 
 });
 
 });
 
-/*====================
+/*=========================
+WISHLIST
+=========================*/
+
+document.querySelectorAll(".wishlist-btn").forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const icon=button.querySelector("i");
+
+icon.classList.toggle("fa-regular");
+
+icon.classList.toggle("fa-solid");
+
+button.classList.toggle("active");
+
+});
+
+});
+
+/*=========================
 SEARCH
-====================*/
+=========================*/
 
-const searchInput=
-document.querySelector(".search-box input");
+const searchInput=document.querySelector(".search-box input");
 
-const searchBtn=
-document.querySelector(".search-box i");
+const searchBtn=document.querySelector(".search-box button");
 
 function searchProducts(){
 
-if(!searchInput)return;
-
-const value=
-searchInput.value.toLowerCase().trim();
+const value=searchInput.value.toLowerCase().trim();
 
 document.querySelectorAll(".product-card").forEach(card=>{
 
-const text=
-card.innerText.toLowerCase();
+const text=card.innerText.toLowerCase();
 
-card.style.display=
-
-(text.includes(value)||value==="")
-
-?
-
-"block"
-
-:
-
-"none";
+card.style.display=text.includes(value)||value===""?"block":"none";
 
 });
 
@@ -82,13 +88,13 @@ card.style.display=
 
 if(searchBtn){
 
-searchBtn.addEventListener("click",searchProducts);
+searchBtn.onclick=searchProducts;
 
 }
 
 if(searchInput){
 
-searchInput.addEventListener("keyup",(e)=>{
+searchInput.addEventListener("keyup",e=>{
 
 if(e.key==="Enter"){
 
@@ -100,15 +106,38 @@ searchProducts();
 
 }
 
-/*====================
-ACTIVE NAV
-====================*/
+/*=========================
+HEADER EFFECT
+=========================*/
 
-const sections=
-document.querySelectorAll("section");
+const header=document.querySelector(".header");
 
-const navLinks=
-document.querySelectorAll(".nav-links a");
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>80){
+
+header.classList.add("scrolled");
+
+}else{
+
+header.classList.remove("scrolled");
+
+}
+
+});
+/*==================================
+SAMORE LUXE
+LUXURY SCRIPT.JS v2.0 (PART 2)
+Paste below PART 1
+==================================*/
+
+/*=========================
+ACTIVE NAVIGATION
+=========================*/
+
+const sections=document.querySelectorAll("section");
+
+const navLinks=document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll",()=>{
 
@@ -116,13 +145,13 @@ let current="";
 
 sections.forEach(section=>{
 
-const top=
-section.offsetTop-150;
+const top=section.offsetTop-170;
 
-if(window.scrollY>=top){
+const height=section.offsetHeight;
 
-current=
-section.getAttribute("id");
+if(pageYOffset>=top && pageYOffset<top+height){
+
+current=section.getAttribute("id");
 
 }
 
@@ -141,49 +170,24 @@ link.classList.add("active");
 });
 
 });
-/*====================
-HEADER SHADOW
-====================*/
 
-const header =
-document.querySelector("header");
-
-window.addEventListener("scroll",()=>{
-
-if(!header) return;
-
-if(window.scrollY>40){
-
-header.classList.add("scrolled");
-
-}else{
-
-header.classList.remove("scrolled");
-
-}
-
-});
-
-/*====================
+/*=========================
 SCROLL REVEAL
-====================*/
+=========================*/
 
-const revealItems=
-document.querySelectorAll(
+const revealItems=document.querySelectorAll(
 
-".product-card,.review-card,.about-container,.packaging-container,.section-heading"
+".product-card,.category-card,.pack-card,.review-card,.contact-card,.about-wrapper,.packaging-wrapper,.section-heading"
 
 );
 
 function reveal(){
 
-const trigger=
-window.innerHeight*0.88;
+const trigger=window.innerHeight*0.85;
 
 revealItems.forEach(item=>{
 
-const top=
-item.getBoundingClientRect().top;
+const top=item.getBoundingClientRect().top;
 
 if(top<trigger){
 
@@ -211,98 +215,92 @@ window.addEventListener("scroll",reveal);
 
 window.addEventListener("load",reveal);
 
-/*====================
-QUICK VIEW
-====================*/
-
-const modal=
-document.getElementById("quickView");
-
-const modalImg=
-document.getElementById("quickImg");
-
-const modalTitle=
-document.getElementById("quickTitle");
-
-const modalPrice=
-document.getElementById("quickPrice");
+/*=========================
+IMAGE HOVER EFFECT
+=========================*/
 
 document.querySelectorAll(".product-card img").forEach(img=>{
 
-img.style.cursor="pointer";
+img.addEventListener("mousemove",()=>{
 
-img.addEventListener("click",()=>{
+img.style.transform="scale(1.08)";
 
-if(!modal) return;
+});
 
-const card=img.closest(".product-card");
+img.addEventListener("mouseleave",()=>{
 
-modalImg.src=img.src;
-
-modalTitle.innerText=
-card.querySelector("h3").innerText;
-
-modalPrice.innerText=
-card.querySelector(".price").innerText;
-
-modal.style.display="flex";
+img.style.transform="scale(1)";
 
 });
 
 });
 
-const closeBtn=
-document.querySelector(".close-quick");
+/*=========================
+SMOOTH BUTTON RIPPLE
+=========================*/
 
-if(closeBtn){
+document.querySelectorAll(".btn,.secondary-btn,.add-cart").forEach(btn=>{
 
-closeBtn.onclick=()=>{
+btn.addEventListener("mouseenter",()=>{
 
-modal.style.display="none";
+btn.style.transition=".35s";
 
-};
+});
 
-}
+});
+/*==================================
+SAMORE LUXE
+LUXURY SCRIPT.JS v2.0 (PART 3)
+Paste below PART 2
+==================================*/
 
-window.onclick=(e)=>{
-
-if(e.target===modal){
-
-modal.style.display="none";
-
-}
-
-};
-/*====================
-SCROLL TO TOP
-====================*/
+/*=========================
+SCROLL TO TOP BUTTON
+=========================*/
 
 const topBtn=document.createElement("button");
 
 topBtn.id="topBtn";
 
-topBtn.innerHTML=
-'<i class="fa-solid fa-arrow-up"></i>';
+topBtn.innerHTML='<i class="fa-solid fa-arrow-up"></i>';
 
 document.body.appendChild(topBtn);
 
+topBtn.style.cssText=`
+
+position:fixed;
+right:25px;
+bottom:25px;
+width:55px;
+height:55px;
+border:none;
+border-radius:50%;
+background:#B76E79;
+color:#fff;
+font-size:20px;
+cursor:pointer;
+display:none;
+z-index:99999;
+box-shadow:0 10px 25px rgba(0,0,0,.35);
+transition:.35s;
+
+`;
+
 window.addEventListener("scroll",()=>{
 
-topBtn.style.display=
+if(window.scrollY>500){
 
-window.scrollY>400
+topBtn.style.display="block";
 
-?
+}else{
 
-"block"
+topBtn.style.display="none";
 
-:
-
-"none";
+}
 
 });
 
-topBtn.onclick=()=>{
+topBtn.addEventListener("click",()=>{
 
 window.scrollTo({
 
@@ -312,29 +310,64 @@ behavior:"smooth"
 
 });
 
-};
+});
 
-/*====================
+/*=========================
+PRODUCT QUICK VIEW
+=========================*/
+
+document.querySelectorAll(".product-card img").forEach(card=>{
+
+card.style.cursor="pointer";
+
+card.addEventListener("click",()=>{
+
+const product=card.closest(".product-card");
+
+const title=product.querySelector("h3").innerText;
+
+const price=product.querySelector("p").innerText;
+
+alert(
+
+title+
+
+"\n\n"+
+
+price+
+
+"\n\nPremium Handmade Jewellery\n\nSamore Luxe"
+
+);
+
+});
+
+});
+
+/*=========================
 CURRENT YEAR
-====================*/
+=========================*/
 
-const copyright=
-document.querySelector(".copyright");
+const year=document.getElementById("year");
 
-if(copyright){
+if(year){
 
-copyright.innerHTML=
-
-`© ${new Date().getFullYear()} Samore Luxe. All Rights Reserved.`;
+year.innerHTML=new Date().getFullYear();
 
 }
 
-/*====================
-PAGE LOADED
-====================*/
+/*=========================
+PAGE LOADER
+=========================*/
 
 window.addEventListener("load",()=>{
 
-console.log("Samore Luxe Website Loaded Successfully ❤️");
+document.body.style.opacity="1";
 
 });
+
+/*=========================
+CONSOLE
+=========================*/
+
+console.log("✨ Samore Luxe Luxury Website Loaded Successfully ✨");
