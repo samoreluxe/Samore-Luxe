@@ -1,43 +1,37 @@
 /*==================================
-
 SAMORE LUXE
 script.js
-
 ==================================*/
+
+/*====================
+ADD TO CART
+====================*/
 
 let cartCount = 0;
 
 const cartCounter = document.getElementById("cart-count");
 
-const cartButtons = document.querySelectorAll(".cart");
+document.querySelectorAll(".add-cart").forEach(button => {
 
-const wishlistButtons = document.querySelectorAll(".wishlist");
-
-const quickButtons = document.querySelectorAll(".quick");
-
-/*====================
-
-ADD TO CART
-
-====================*/
-
-cartButtons.forEach(button=>{
-
-button.addEventListener("click",()=>{
+button.addEventListener("click", () => {
 
 cartCount++;
 
-cartCounter.innerText=cartCount;
+if(cartCounter){
+cartCounter.innerText = cartCount;
+}
 
-button.innerHTML='<i class="fa-solid fa-check"></i> Added';
+button.innerHTML =
+'<i class="fa-solid fa-check"></i> Added';
 
-button.style.background="#2ecc71";
+button.style.background = "#2ecc71";
 
-setTimeout(()=>{
+setTimeout(() => {
 
-button.innerHTML='<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
+button.innerHTML =
+'<i class="fa-solid fa-cart-shopping"></i> Add to Cart';
 
-button.style.background="";
+button.style.background = "";
 
 },1500);
 
@@ -46,123 +40,88 @@ button.style.background="";
 });
 
 /*====================
-
 WISHLIST
-
 ====================*/
 
-wishlistButtons.forEach(button=>{
+document.querySelectorAll(".wishlist").forEach(button=>{
 
 button.addEventListener("click",()=>{
 
-const icon=button.querySelector("i");
+const icon = button.querySelector("i");
+
+if(icon){
 
 icon.classList.toggle("fa-regular");
 
 icon.classList.toggle("fa-solid");
 
-button.style.color="#B76E79";
+}
+
+button.classList.toggle("active");
 
 });
 
 });
 
-/*====================
-
-QUICK VIEW
-
-====================*/
-
-quickButtons.forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-const card=button.closest(".product-card");
-
-const title=card.querySelector("h3").innerText;
-
-const price=card.querySelector(".price").innerText;
-
-const desc=card.querySelector("p").innerText;
-
-alert(
-
-title+
-
-"\n\n"+
-
-price+
-
-"\n\n"+
-
-desc
-
-);
-
-});
-
-});
 /*====================
 SEARCH
 ====================*/
 
-const searchInput = document.querySelector(".search-box input");
-const searchBtn = document.querySelector(".search-box i");
+const searchInput =
+document.querySelector(".search-box input");
 
-function searchProducts() {
+const searchBtn =
+document.querySelector(".search-box i");
 
-const value = searchInput.value.trim().toLowerCase();
+function searchProducts(){
 
-document.querySelectorAll(".product-card").forEach(card => {
+if(!searchInput) return;
 
-const text = card.innerText.toLowerCase();
+const value =
+searchInput.value.toLowerCase().trim();
 
-if (text.includes(value) || value === "") {
-card.style.display = "block";
-} else {
-card.style.display = "none";
-}
+document.querySelectorAll(".product-card").forEach(card=>{
+
+const text =
+card.innerText.toLowerCase();
+
+card.style.display =
+(text.includes(value) || value==="") ?
+"block" : "none";
 
 });
 
 }
 
-searchInput.addEventListener("keyup", function(e){
+if(searchInput){
+
+searchInput.addEventListener("keyup",(e)=>{
+
 if(e.key==="Enter"){
+
 searchProducts();
+
 }
-});
-
-searchBtn.addEventListener("click", searchProducts);
-/*====================
-
-PRODUCT FILTER
-
-====================*/
-
-const filterButtons=document.querySelectorAll(".filter-buttons button");
-
-filterButtons.forEach(button=>{
-
-button.addEventListener("click",()=>{
-
-filterButtons.forEach(btn=>btn.classList.remove("active"));
-
-button.classList.add("active");
 
 });
 
-});
+}
+
+if(searchBtn){
+
+searchBtn.addEventListener("click",searchProducts);
+
+}
 
 /*====================
-
-SMOOTH NAV ACTIVE
-
+ACTIVE NAVBAR
 ====================*/
 
-const sections=document.querySelectorAll("section");
+const sections =
+document.querySelectorAll("section");
 
-const navLinks=document.querySelectorAll(".nav-links a");
+const navLinks =
+document.querySelectorAll(".nav-links a");
 
 window.addEventListener("scroll",()=>{
 
@@ -170,11 +129,13 @@ let current="";
 
 sections.forEach(section=>{
 
-const top=section.offsetTop-140;
+const top =
+section.offsetTop-150;
 
-if(scrollY>=top){
+if(window.scrollY>=top){
 
-current=section.getAttribute("id");
+current=
+section.getAttribute("id");
 
 }
 
@@ -193,51 +154,50 @@ link.classList.add("active");
 });
 
 });
+
 /*====================
-
 HEADER SHADOW
-
 ====================*/
 
-const header=document.querySelector("header");
+const header =
+document.querySelector("header");
 
 window.addEventListener("scroll",()=>{
 
-if(window.scrollY>60){
+if(!header) return;
 
-header.style.background="rgba(10,10,10,.98)";
+if(window.scrollY>40){
 
-header.style.boxShadow="0 10px 35px rgba(0,0,0,.35)";
+header.classList.add("scrolled");
 
 }else{
 
-header.style.background="rgba(10,10,10,.92)";
-
-header.style.boxShadow="none";
+header.classList.remove("scrolled");
 
 }
 
 });
 
 /*====================
-
 SCROLL REVEAL
-
 ====================*/
 
-const revealItems=document.querySelectorAll(
+const reveals =
+document.querySelectorAll(
 
-".product-card,.review-card,.about-container,.packaging-grid img,.brand-story,.section-heading"
+".product-card,.review-card,.about-container,.packaging-container,.section-heading"
 
 );
 
-const reveal=()=>{
+function reveal(){
 
-const trigger=window.innerHeight*0.88;
+const trigger =
+window.innerHeight*0.88;
 
-revealItems.forEach(item=>{
+reveals.forEach(item=>{
 
-const top=item.getBoundingClientRect().top;
+const top =
+item.getBoundingClientRect().top;
 
 if(top<trigger){
 
@@ -249,13 +209,13 @@ item.style.transform="translateY(0)";
 
 });
 
-};
+}
 
-revealItems.forEach(item=>{
+reveals.forEach(item=>{
 
 item.style.opacity="0";
 
-item.style.transform="translateY(60px)";
+item.style.transform="translateY(50px)";
 
 item.style.transition=".8s ease";
 
@@ -266,21 +226,66 @@ window.addEventListener("scroll",reveal);
 window.addEventListener("load",reveal);
 
 /*====================
-
-CURRENT YEAR
-
+SCROLL TO TOP
 ====================*/
 
-const copyright=document.querySelector(".copyright");
+const topBtn =
+document.createElement("button");
+
+topBtn.innerHTML =
+'<i class="fa-solid fa-arrow-up"></i>';
+
+topBtn.id="topBtn";
+
+document.body.appendChild(topBtn);
+
+topBtn.style.cssText=`
+position:fixed;
+right:25px;
+bottom:25px;
+width:50px;
+height:50px;
+border:none;
+border-radius:50%;
+background:#B76E79;
+color:#fff;
+cursor:pointer;
+display:none;
+font-size:18px;
+z-index:999;
+`;
+
+window.addEventListener("scroll",()=>{
+
+topBtn.style.display =
+window.scrollY>400 ? "block" : "none";
+
+});
+
+topBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+/*====================
+CURRENT YEAR
+====================*/
+
+const copyright =
+document.querySelector(".copyright");
 
 if(copyright){
 
-copyright.innerHTML=`© ${new Date().getFullYear()} Samore Luxe. All Rights Reserved.`;
+copyright.innerHTML =
+`© ${new Date().getFullYear()} Samore Luxe. All Rights Reserved.`;
 
 }
 
-/*====================
-
-END OF SCRIPT.JS
-
-====================*/
+console.log("Samore Luxe Loaded Successfully");
